@@ -1,0 +1,22 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: hawkeye-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: hawkeye
+          uri: lb://hawkeye
+          predicates:
+            - Path=/hawkeye/**
+          filters:
+            - StripPrefix=1
+nacos:
+  discovery:
+    server-addr: 192.168.0.102:8848
