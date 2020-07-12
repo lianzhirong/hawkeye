@@ -1,0 +1,54 @@
+server:
+  port: 9303
+
+spring:
+  application:
+    name: hawkeye
+  profiles:
+    include: custom
+  datasource:
+    first:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.0.102:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+      username: root
+      password: root
+    second:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.0.102:3306/test1?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+      username: root
+      password: root
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+        shutdown-timeout: 0
+  activiti:
+    check-process-definitions: false #自动检查、部署流程定义文件
+    database-schema-update: true #自动更新数据库结构
+    #流程定义文件存放目录
+    process-definition-location-prefix: classpath:/processes/
+rocketmq:
+  nameServer: 192.168.0.102:9876
+  producer:
+    group: producer
+nacos:
+  config:
+    server-addr: 192.168.0.102:8848
+    #namespace: ff270841-7441-4a95-99bf-1771aef9e29a
+    #group: DEFAULT_GROUP
+  discovery:
+    server-addr: 192.168.0.102:8848
+
+minio:
+  host: http://127.0.0.2:9000
+  accessKey: R79QF73FH75AZ64L66TG
+  secretKey: aeic8uhqf+qyXK5+Sx4aQ5C3TRUhHecKgx7adjzX
+logging:
+  config: classpath:config/logback-spring.xml
